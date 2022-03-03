@@ -1,1 +1,470 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+#: import MDDropdownMenu kivymd.uix.menu.MDDropdownMenu
+#MD=KIVY MD=MATERIAL DESIGN
+ScreenManager:
+   transition: NoTransition()
+#1---------------------------------------------------------------------------------------------------------------------------------
+   MDScreen:
+      name: "homepage"   # Name of Default screen
 
+      FitImage:
+         source: "conetra.png"  # Image set on the background of homepage
+         size_hint: 1, 1
+
+      MDRoundFlatButton:
+         id: visualize
+         text: "VISUALIZE"
+         font_size: 16
+         size_hint: 0.15, 0.05
+         pos_hint: {"x":0.65, "center_y":0.95}
+         on_press: app.on_visualize_dropdown_press()
+
+      MDRoundFlatButton:
+         text: "LOG IN"
+         font_size: 16
+         size_hint: 0.15, 0.05
+         pos_hint: {"x":0.825, "center_y":0.95}
+         on_press: app.root.current = "login_1"
+#2---------------------------------------------------------------------------------------------------------------------------------
+   MDScreen:
+      name: "login_1"
+      md_bg_color: 0.67, 0.86, 0.85, 1   # Background colour to Teal
+
+      MDIconButton:                      # Back page Icon
+         icon: "arrow-left"
+         size_hint: None, None
+         size: 30, 30
+         pos_hint: {"x":0.025, "y":0.9}
+         on_press: app.login_1_to_homepage()
+
+      MDCard:                          # The white Card in Login 1 page
+         size_hint: None, None
+         size: 400, 450
+         radius: [10, 10, 10, 10]
+         pos_hint: {"center_x": 0.5, "center_y": 0.5}
+         elevation: 0
+
+         FloatLayout:                  # Not using Box layout in designing the card
+            size_hint: 1, 1
+
+            MDLabel:                   # label ~~> Just text
+               text: "LOGIN"
+               font_size: 40
+               halign: 'center'
+               size_hint_y: None
+               pos_hint: {"center_x": 0.5, "center_y": 0.8}
+
+            MDTextField:               # textfield ~~> Enter Data
+               id: aadhaar
+               mode: "rectangle"
+               hint_text: "Aadhaar no."
+               size_hint_x: None
+               width: 300
+               font_size: 18
+               pos_hint: {"center_x": 0.5, "center_y": 0.55}
+
+            MDRaisedButton:            # Raised Log In Button
+               text: "Log in"
+               font_size: 15
+               pos_hint: {"x": 0.69, "center_y": 0.11}
+               md_bg_color: 0.9, 0.35, 0.16, 1
+               on_press: app.login_1_to_login_2()
+
+            MDFlatButton:
+               text: "Log in as authority"
+               font_size: 14
+               pos_hint: {"x":0.06, "center_y": 0.09}
+               on_press: app.login_1_to_authority()
+
+            MDFlatButton:
+               text: "Are you new? Sign up"
+               font_size: 14
+               pos_hint: {"x":0.06, "center_y": 0.16}
+               on_press: app.login_1_to_signup_1()
+
+#3---------------------------------------------------------------------------------------------------------------------------------
+   MDScreen:
+      name: "login_2"
+      md_bg_color: 0.67, 0.86, 0.85, 1
+
+      MDIconButton:
+         icon: "arrow-left"
+         size_hint: None, None
+         size: 30, 30
+         pos_hint: {"x":0.025, "y":0.9}
+         on_press: app.login_2_to_homepage()
+
+      MDCard:
+         size_hint: None, None
+         size: 700, 600
+         radius: [10, 10, 10, 10]
+         pos_hint: {"center_x": 0.5, "center_y": 0.5}
+         elevation: 0
+
+         FloatLayout:
+            size_hint: 1, 1
+            pos_hint: {"x": 0, "y": 0}
+
+            MDLabel:
+               text: "Account"
+               font_size: 30
+               size_hint_y:None
+               height:self.texture_size[1]
+               pos_hint: {"x": 0.07, "y":0.85}
+
+            MDIconButton:                             # Authority Add/Delete icon
+               id: add_authority_icon
+               size_hint: None, None
+               size: 30, 30
+               pos_hint: {"x":0.745, "y":0.898}
+               on_press: app.add_authority()
+            MDIconButton:                             # Pencil Icon for Modification
+               icon: "pencil"
+               size_hint: None, None
+               size: 30, 30
+               pos_hint: {"x":0.835, "y":0.9}
+               on_press: app.login_2_update()
+
+            MDIconButton:                             # Delete Icon
+               icon: "delete"
+               size_hint: None, None
+               size: 30, 30
+               pos_hint: {"x":0.91, "y":0.9}
+               on_press: app.delete_record()
+
+            MDLabel:
+               text: "Aadhaar No."
+               bold: True
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.71}
+
+            MDLabel:
+               id: log_aadhaar
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.67}
+
+            MDLabel:
+               text: "Name"
+               bold: True
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.585}
+
+            MDLabel:
+               id: log_name
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.545}
+
+            MDLabel:
+               text: "Age"
+               bold: True
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.46}
+
+            MDLabel:
+               id: log_age
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.42}
+
+            MDLabel:
+               text: "Gender"
+               bold: True
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.335}
+
+            MDLabel:
+               id: log_gender
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.07, "y":0.295}
+
+            MDLabel:
+               text: "Vaccine"
+               bold: True
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.53, "y":0.71}
+
+            MDLabel:
+               id: log_vaccine
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.53, "y":0.67}
+
+            MDLabel:
+               text: "Vaccine Status"
+               bold: True
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.53, "y":0.585}
+
+            MDLabel:
+               id: log_vaccine_status
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.53, "y":0.545}
+
+            MDLabel:
+               text: "Have you gotten covid?"
+               bold: True
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.53, "y":0.45}
+
+            MDLabel:
+               id: log_covid
+               size_hint: 0.4, 0.1
+               pos_hint: {"x":0.53, "y":0.39}
+#4--------------------------------------------------------------------------------------------------------------------------------
+   MDScreen:
+      name: "signup_1"
+      md_bg_color: 0.67, 0.86, 0.85, 1
+
+      MDIconButton:
+         icon: "arrow-left"
+         size_hint: None, None
+         size: 30, 30
+         pos_hint: {"x":0.025, "y":0.9}
+         on_press: app.signup_1_to_homepage()
+
+      MDCard:
+         size_hint: None, None                  # When the window size is changed,the card size won't change
+         size: 500, 600
+         radius: [10, 10, 10, 10]               # Rounded corners
+         pos_hint: {"center_x": 0.5, "center_y": 0.5}
+         elevation: 0                           # No shadow for the card
+
+         FloatLayout:
+            id: page_1
+            size_hint: 1, 1
+            pos_hint: {"x": 0, "y": 0}
+
+            MDLabel:
+               id: new_account
+               text: "New Account"
+               size_hint_y:None
+               height:self.texture_size[1]
+               font_size: 30
+               pos_hint: {"x": 0.125, "y":0.85}
+
+            MDIconButton:
+               id: error_icon_1              # When user doesn't enter data
+               icon: "alert-circle"
+               theme_text_color: "Custom"    # Choosing a colour other than the default one (black)
+               text_color: 1,1,1,1           # Initially White
+               pos_hint: {"x": 0.1, "y":0.785}
+
+            MDLabel:
+               id: error_1                   # What error is on the screen
+               markup: True
+               font_size: 15
+               size_hint_y:None
+               height:self.texture_size[1]
+               pos_hint: {"x": 0.18, "y":0.81}
+
+            MDTextField:
+               id: new_aadhaar
+               hint_text: "Aadhaar No."                    # Hints you what you are supposed to enter in the text field
+               helper_text_mode: "persistent"              # Always there (Persistent)
+               helper_text: "This field is required"
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.675}
+
+            MDTextField:
+               id: new_name
+               hint_text: "Name"
+               helper_text_mode: "persistent"
+               helper_text: "This field is required"
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.545}
+
+            MDTextField:
+               id: new_age
+               hint_text: "Age"
+               helper_text_mode: "persistent"
+               helper_text: "This field is required"
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.415}
+
+            MDTextField:
+               id: new_gender
+               hint_text: "Gender"
+               helper_text_mode: "persistent"
+               helper_text: "This field is required"
+               icon_right: "arrow-down-drop-circle-outline"   # Down Arrow for dropdown list
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.285}
+               on_focus: app.on_gender_dropdown_press()       # on_focus is used with Text Field , on_press is used with Buttons
+
+            MDRaisedButton:
+               text: "Submit"
+               font_size: 15
+               pos_hint: {"x": 0.775, "y": 0.03}
+               md_bg_color: 0.9, 0.35, 0.16, 1
+               on_press: app.signup_1_to_login_2()
+#5---------------------------------------------------------------------------------------------------------------------------------
+
+   MDScreen:
+      name: "signup_2"
+      md_bg_color: 0.67, 0.86, 0.85, 1
+
+      MDIconButton:
+         icon: "arrow-left"
+         size_hint: None, None
+         size: 30, 30
+         pos_hint: {"x":0.025, "y":0.9}
+         on_press: app.signup_2_back_to_login_2()
+
+      MDCard:
+         size_hint: None, None
+         size: 500, 600
+         radius: [10, 10, 10, 10]
+         pos_hint: {"center_x": 0.5, "center_y": 0.5}
+         elevation: 0
+
+         FloatLayout:
+            size_hint: 1, 1
+            pos_hint: {"x": 0, "y": 0}
+
+            MDLabel:
+               text: "Vaccine related info:"
+               size_hint_y:None
+               height:self.texture_size[1]
+               font_size: 20
+               pos_hint: {"x": 0.125, "y":0.85}
+
+            MDIconButton:
+               id: error_icon_2                # When you submit without entering vaccine info (in the edit button)
+               icon: "alert-circle"
+               theme_text_color: "Custom"
+               text_color: 1,1,1,1
+               pos_hint: {"x": 0.1, "y":0.785}
+
+            MDLabel:
+               id: error_2    # Label that all fields are required
+               markup: True   #to change text colour
+               size_hint_y:None                #height of the label is independant of the card
+               height:self.texture_size[1]     #height of label is height of text
+               font_size: 15
+               pos_hint: {"x": 0.18, "y":0.81}
+
+            MDTextField:
+               id: update_aadhaar
+               hint_text: "Aadhaar No."
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.675}
+               disabled: True                  #not letting edit
+
+            MDTextField:
+               id: new_vaccine
+               hint_text: "Vaccine"
+               helper_text_mode: "persistent"
+               helper_text: "This field is required"
+               icon_right: "arrow-down-drop-circle-outline"
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.55}
+               on_focus: app.on_vaccine_dropdown_press()
+
+            MDTextField:
+               id: new_vaccine_status
+               hint_text: "Vaccine Status"
+               helper_text_mode: "persistent"
+               helper_text: "This field is required"
+               icon_right: "arrow-down-drop-circle-outline"
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.4}
+               on_focus: app.on_vaccine_status_dropdown_press()
+
+            MDTextField:
+               id: new_covid
+               hint_text: "Have you gotten covid?"
+               helper_text_mode: "persistent"
+               helper_text: "This field is required"
+               icon_right: "arrow-down-drop-circle-outline"
+               size_hint: 0.6, 0.1
+               pos_hint: {"x":0.125, "y":0.25}
+               on_focus: app.on_covid_dropdown_press()
+
+            MDRaisedButton:
+               id: submit2
+               text: "Submit"
+               font_size: 15
+               pos_hint: {"x": 0.775, "y": 0.03}
+               md_bg_color: 0.9, 0.35, 0.16, 1
+               on_press: app.signup_2_to_login_2()
+#6---------------------------------------------------------------------------------------------------------------------------------
+   MDScreen:
+      name: "authority"
+      md_bg_color: 0.67, 0.86, 0.85, 1
+
+      MDIconButton:
+         icon: "arrow-left"
+         size_hint: None, None
+         size: 30, 30
+         pos_hint: {"x":0.025, "y":0.9}
+         on_press: app.authority_to_homepage()
+
+      MDCard:
+         radius: [10, 10, 10, 10]
+         pos_hint: {"center_x":0.5, "y":0.685}
+         size_hint: (0.9, None)
+         height: 140
+         elevation: 0
+
+         FloatLayout:
+            size_hint: 1, 1
+            pos_hint: {"x":0, "y":0}
+
+            MDTextField:
+               id: authority_aadhaar
+               hint_text: "Aadhaar No."
+               size_hint: 0.2, 0.4
+               pos_hint: {"x": 0.04, "y": 0.525}
+
+            MDTextField:
+               id: authority_name
+               hint_text: "Name"
+               size_hint: 0.2, 0.4
+               pos_hint: {"x": 0.28, "y": 0.525}
+
+            MDTextField:
+               id: authority_age
+               hint_text: "Age"
+               size_hint: 0.2, 0.4
+               pos_hint: {"x": 0.52, "y": 0.525}
+
+            MDTextField:
+               id: authority_gender
+               hint_text: "Gender"
+               size_hint: 0.2, 0.4
+               pos_hint: {"x": 0.76, "y": 0.525}
+
+            StackLayout:                #to orient the buttons on the screen
+               orientation: 'rl-tb'
+               size_hint: 1, 0.5
+               pos_hint: {"x": 0, "y": 0}
+               padding: [10,10,30,10]
+               spacing: 20
+
+               MDRaisedButton:
+                  text: "Search"
+                  font_size: 15
+                  md_bg_color: 0.9, 0.35, 0.16, 1
+                  on_press: app.authority_search()
+
+               MDRaisedButton:
+                  id: delete_record
+                  icon: "delete"
+                  text: "Delete"
+                  font_size: 15
+                  md_bg_color: 0.9, 0.35, 0.16, 1
+                  on_press: app.delete_records()
+
+               MDRectangleFlatButton:
+                  text: "Open"
+                  font_size: 15
+                  on_press: app.authority_to_login_2()
+
+               MDFlatButton:
+                  text: "Clear"
+                  font_size: 15
+                  on_press: app.clear_search()
+
+      BoxLayout:
+         id:body
+         pos_hint: {"center_x":0.5, "y":0.02}
+         size_hint: (0.9, 0.6)
+#***---------------------------------------------------------------------------------------------------------------------------------
